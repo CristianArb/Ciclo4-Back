@@ -7,13 +7,14 @@ package com.segioarboleda.divinacomedia.app.repositories.crud;
 import com.segioarboleda.divinacomedia.app.model.User;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 
 /**
  *
  * @author cterr
  */
-public interface UserCrudRepository extends CrudRepository<User ,Integer>{
+public interface UserCrudRepository extends MongoRepository<User ,Integer>{   
     
     /**
      * Encontrar por nombre
@@ -44,5 +45,15 @@ public interface UserCrudRepository extends CrudRepository<User ,Integer>{
      * @return
      */
     public Optional<User> findByEmailAndPassword(String email, String password);
+    
+    /**
+     * 
+     * @param id
+     * @param email
+     * @param name
+     * @return
+     */
+    public List<User> findByIdOrEmailOrName(Integer id, String email, String name);
+
     
 }

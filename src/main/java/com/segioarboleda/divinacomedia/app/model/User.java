@@ -4,40 +4,49 @@
  */
 package com.segioarboleda.divinacomedia.app.model;
 
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
-import java.io.Serializable;
-import javax.persistence.Index;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
+ * User Esta Clase implementa Serializable, es un Entity que se almacena con el
+ * nombre <H2> reservation </H2> en la Base de Datos Contine los atributos y se
+ * maneja un autoincremento para idReservation
  *
- * @author cterr
+ * @since 2021-11-22
+ * @version 1.0
+ * @author Equipo 4
  */
-@Data //para generar los getters and setters
-@NoArgsConstructor //paraa generar constructor vacio
-@AllArgsConstructor //para generar constructor con todos sus parametros
-@Entity
-@Table(name = "user")//, indexes = @Index(name = "index_email", columnList = "user_email", unique = true))
-public class User implements Serializable {
+@Document(collection = "usuarios")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "user_mail", unique = true, length = 50, nullable = false)
+    private String identification;
+
+    private String name;
+
+    private Date birthtDay;
+
+    private String monthBirthtDay;
+
+    private String address;
+
+    private String cellPhone;
+
     private String email;
 
-    @Column(name = "user_password", unique = true, length = 50, nullable = false)
     private String password;
 
-    @Column(name = "user_name", unique = true, length = 50, nullable = false)
-    private String name;
+    private String zone;
+
+    private String type;
 
 }

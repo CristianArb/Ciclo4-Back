@@ -5,11 +5,11 @@
 package com.segioarboleda.divinacomedia.app.repositories;
 
 import com.segioarboleda.divinacomedia.app.model.User;
-import com.segioarboleda.divinacomedia.app.repositories.crud.UserCrudRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import com.segioarboleda.divinacomedia.app.repositories.crud.UserCrudRepository;
 
 /**
  *
@@ -87,4 +87,26 @@ public class UserRepository {
     public User save(User user){
         return repository.save(user);
     }
+    
+    
+    /**
+     * Eliminar un registro
+     * @param id 
+     */
+    public void delete(Integer id){
+        repository.deleteById(id);
+    }
+    
+    
+    /**
+     * 
+     * @param id
+     * @param email
+     * @param name
+     * @return
+     */
+    public List<User> getUserByIdOrEmailOrName(Integer id, String email, String name){
+        return repository.findByIdOrEmailOrName(id,email,name);
+    }
+
 }

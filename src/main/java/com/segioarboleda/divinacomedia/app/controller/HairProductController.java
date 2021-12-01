@@ -4,8 +4,8 @@
  */
 package com.segioarboleda.divinacomedia.app.controller;
 
-import com.segioarboleda.divinacomedia.app.model.User;
-import com.segioarboleda.divinacomedia.app.services.UserService;
+import com.segioarboleda.divinacomedia.app.model.HairProduct;
+import com.segioarboleda.divinacomedia.app.services.HairProductService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,76 +24,53 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+
 /**
  *
  * @author cterr
  */
 @RestController
-@RequestMapping("user")
-@CrossOrigin(origins = "*", methods = {GET, POST, PUT, DELETE})
-public class UserController {
-
+@RequestMapping("hairproducts")
+@CrossOrigin(origins = "*", methods= {GET, POST, PUT, DELETE})
+public class HairProductController {
+    
     /**
      * Instancia con @Autowired de la clase servicio service.
      */
     @Autowired
-    private UserService service;
-
-    /**
+    private HairProductService service;
+    
+  /**
      * Metodo GET
-     *
      * @return
      */
     @GetMapping("/all") //GET
-    public List<User> getUsers() {
+    public List<HairProduct> getHairProducts(){
         return service.getAll();
     }
 
     /**
-     * Metodo POST que guarda un usuario
-     *
-     * @param user
+     * Metodo POST
+     * @param hairProduct
      * @return
      */
     @PostMapping("/new") //POST
     @ResponseStatus(HttpStatus.CREATED)
-    public User save(@RequestBody User user) {
-        return service.save(user);
+    public HairProduct save(@RequestBody HairProduct hairProduct){
+        return service.save(hairProduct);
     }
-
-    /**
-     * Metodo GET entrada Email
-     *
-     * @param email
-     * @return
-     */
-    @GetMapping("/emailexist/{email}")
-    public boolean existEmail(@PathVariable("email") String email) {
-        return service.getUserByEmail(email);
-    }
-
-    /**
-     * Metodo GET entrada Email y Password
-     *
-     * @param email
-     * @param password
-     * @return
-     */
-    @GetMapping("/{email}/{password}")
-    public User authUser(@PathVariable("email") String email, @PathVariable("password") String password) {
-        return service.getUserByEmailAndPassword(email, password);
-    }
-
+    
+    
     /**
      * Metodo PUT que actualiza un usuario
      *
-     * @param user
+     * @param hairProduct
      * @return
      */
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public User update(@RequestBody User user) {
-        return service.update(user);
+    public HairProduct  update(@RequestBody HairProduct hairProduct) {
+        return service.update(hairProduct);
     }
 
     /**
@@ -103,7 +80,8 @@ public class UserController {
      */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public boolean delete(@PathVariable("id") Integer id) {
+    public boolean delete(@PathVariable("id") String id) {
         return service.delete(id);
     }
+
 }
