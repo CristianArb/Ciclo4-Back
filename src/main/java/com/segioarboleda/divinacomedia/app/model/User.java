@@ -4,9 +4,7 @@
  */
 package com.segioarboleda.divinacomedia.app.model;
 
-import java.util.Date;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
