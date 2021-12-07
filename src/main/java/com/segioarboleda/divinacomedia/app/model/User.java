@@ -5,6 +5,8 @@
 package com.segioarboleda.divinacomedia.app.model;
 
 import java.util.Date;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,15 +29,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User {
 
     @Id
+    @GeneratedValue
     private Integer id;
 
     private String identification;
 
     private String name;
 
-    private Date birthtDay;
+    //private Date birthDay;
 
-    private String monthBirthtDay;
+    //private String monthBirthtDay;
 
     private String address;
 

@@ -4,19 +4,19 @@
  */
 package com.segioarboleda.divinacomedia.app.repositories.crud;
 
-import com.segioarboleda.divinacomedia.app.model.HairProduct;
-import java.util.Optional;
+import com.segioarboleda.divinacomedia.app.model.Order;
 import org.springframework.data.mongodb.repository.MongoRepository;
-
 
 /**
  *
  * @author cterr
  */
-public interface HairProductCrudRepository extends MongoRepository<HairProduct,String>{
-
-/**
- * public Optional<HairProduct> findByReference(String reference);*/
+public interface OrderCrudRepositiry extends MongoRepository<Order,Integer>{
+    
+    /**
+     * Retorna ordenes de pedido que concida con la zona como parametro
+     */
+    //public List<order> findbyZone(final String country);
     
 
 }

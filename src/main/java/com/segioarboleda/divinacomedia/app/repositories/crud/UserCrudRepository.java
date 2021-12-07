@@ -8,7 +8,6 @@ import com.segioarboleda.divinacomedia.app.model.User;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
 
 /**
  *
@@ -54,6 +53,12 @@ public interface UserCrudRepository extends MongoRepository<User ,Integer>{
      * @return
      */
     public List<User> findByIdOrEmailOrName(Integer id, String email, String name);
+    
+    /**
+     * Seleccionar el usuario
+     * @return 
+     */
+    //public Optional<User> findTopByOrderByDesc();
 
     
 }

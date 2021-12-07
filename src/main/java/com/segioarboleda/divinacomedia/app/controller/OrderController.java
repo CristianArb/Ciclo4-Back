@@ -4,8 +4,8 @@
  */
 package com.segioarboleda.divinacomedia.app.controller;
 
-import com.segioarboleda.divinacomedia.app.model.User;
-import com.segioarboleda.divinacomedia.app.services.UserService;
+import com.segioarboleda.divinacomedia.app.model.Order;
+import com.segioarboleda.divinacomedia.app.services.OrderService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,72 +28,48 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author cterr
  */
-@RestController
-@RequestMapping("user")
-@CrossOrigin(origins = "*", methods = {GET, POST, PUT, DELETE})
-public class UserController {
 
-    /**
+@RestController
+@RequestMapping("order")
+@CrossOrigin(origins = "*", methods= {GET, POST, PUT, DELETE})
+public class OrderController {
+/**
      * Instancia con @Autowired de la clase servicio service.
      */
     @Autowired
-    private UserService service;
-
-    /**
+    private OrderService service;
+    
+  /**
      * Metodo GET
-     *
      * @return
      */
     @GetMapping("/all") //GET
-    public List<User> getUsers() {
+    public List<Order> getOrder(){
         return service.getAll();
     }
 
     /**
-     * Metodo POST que guarda un usuario
-     *
-     * @param user
+     * Metodo POST
+     * @param order
      * @return
      */
     @PostMapping("/new") //POST
     @ResponseStatus(HttpStatus.CREATED)
-    public User save(@RequestBody User user) {
-        return service.save(user);
+    public Order save(@RequestBody Order order){
+        return service.save(order);
     }
-
-    /**
-     * Metodo GET entrada Email
-     *
-     * @param email
-     * @return
-     */
-    @GetMapping("/emailexist/{email}")
-    public boolean existEmail(@PathVariable("email") String email) {
-        return service.getUserByEmail(email);
-    }
-
-    /**
-     * Metodo GET entrada Email y Password
-     *
-     * @param email
-     * @param password
-     * @return
-     */
-    @GetMapping("/{email}/{password}")
-    public User authUser(@PathVariable("email") String email, @PathVariable("password") String password) {
-        return service.getUserByEmailAndPassword(email, password);
-    }
-
+    
+    
     /**
      * Metodo PUT que actualiza un usuario
      *
-     * @param user
+     * @param order
      * @return
      */
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public User update(@RequestBody User user) {
-        return service.update(user);
+    public Order update(@RequestBody Order order) {
+        return service.update(order);
     }
 
     /**
@@ -105,11 +81,6 @@ public class UserController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("id") Integer id) {
         return service.delete(id);
-    }
-    
-   @GetMapping("/{id}")
-    public User getUser(@PathVariable("id") Integer id){
-        return service.getUserByIdUser(id);
     }
 
 }

@@ -41,11 +41,11 @@ public class HairProductService {
      * @return
      */
     public HairProduct save(HairProduct product){
-        if(product.getReference()==null){
+        if(product.getId()==null){
             return product;
         }else{
-            Optional<HairProduct> existsProduct = repository.getByReference(product.getReference());
-            if(existsProduct.isEmpty()){
+            Optional<HairProduct> existeProduct = repository.getProductById(product.getId());
+            if(existeProduct.isEmpty()){
                 return repository.save(product);
             }else {
                 return product;
@@ -54,44 +54,44 @@ public class HairProductService {
     }
 
     
-    public HairProduct update(HairProduct hairproduct){
-        Optional<HairProduct> existsProduct = repository.getByReference(hairproduct.getReference());
+    public HairProduct update(HairProduct product){
+        Optional<HairProduct> existsProduct = repository.getProductById(product.getId());
         if(existsProduct.isPresent()){
-            if (hairproduct.getReference()!=null){
-                existsProduct.get().setReference(hairproduct.getReference());
-            }
-            if (hairproduct.getBrand()!=null){
-                existsProduct.get().setBrand(hairproduct.getBrand());
-            }
-            if (hairproduct.getCategory()!=null){
-                existsProduct.get().setCategory(hairproduct.getCategory());
-            }    
-            if (hairproduct.getName()!=null){
-                existsProduct.get().setName(hairproduct.getName());
-            }
-            if (hairproduct.getDescription()!=null){
-                existsProduct.get().setDescription(hairproduct.getDescription());
-            }
             
-            /**
-            if (hairproduct.getAvailability()!=null){
-                existsProduct.get().setAvailability(hairproduct.Availability());
+            
+            
+            if (product.getId()!=null){
+                existsProduct.get().setId(product.getId());
             }
-            */
-            if (hairproduct.getPrice()!=0){
-                existsProduct.get().setPrice(hairproduct.getPrice());
+            if (product.getBrand()!=null){
+                existsProduct.get().setBrand(product.getBrand());
             }
-            if (hairproduct.getQuantity()!=0){
-                existsProduct.get().setQuantity(hairproduct.getQuantity());
+            if (product.getCategory()!=null){
+                existsProduct.get().setCategory(product.getCategory());
+            }    
+            if (product.getName()!=null){
+                existsProduct.get().setName(product.getName());
             }
-            if (hairproduct.getPhotography()!=null){
-                existsProduct.get().setPhotography(hairproduct.getPhotography());
+            if (product.getDescription()!=null){
+                existsProduct.get().setDescription(product.getDescription());
+            }
+            existsProduct.get().setAvailability(product.getAvailability());
+            
+            if (product.getPrice()!=0){
+                existsProduct.get().setPrice(product.getPrice());
+            }
+            if (product.getQuantity()!=0){
+                existsProduct.get().setQuantity(product.getQuantity());
+            }
+            if (product.getPhotography()!=null){
+                existsProduct.get().setPhotography(product.getPhotography());
             }
         
             return repository.save(existsProduct.get());
             
-        }else {
-            return hairproduct;
+        }
+        else {
+            return product;
         }
     }
     
@@ -101,8 +101,8 @@ public class HairProductService {
      * @return
      */
     public boolean delete(String id){
-        Boolean aBoolean = repository.getByReference(id).map(hairproduct -> {
-            repository.delete(hairproduct.getReference());
+        Boolean aBoolean = repository.getProductById(id).map(hairproduct -> {
+            repository.delete(hairproduct.getId());
             return true;
         }).orElse(false);
         return aBoolean;

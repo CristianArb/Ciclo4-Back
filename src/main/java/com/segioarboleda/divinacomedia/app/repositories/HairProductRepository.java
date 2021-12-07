@@ -33,15 +33,16 @@ public class HairProductRepository {
     public Optional<HairProduct> getProductById(String id){
         return repository.findById(id);
     }
+   
     
     /**
      * 
      * @param reference
      * @return 
-     */
+     *
     public Optional<HairProduct> getByReference(String reference) {
-        return repository.findById(reference);
-    }
+        return repository.findByReference(reference);
+    }*/
 
     /**
      * Obtener registro
@@ -62,13 +63,10 @@ public class HairProductRepository {
 
     /**
      * Guardar registro
-     * @param id
+     * @param reference
      */
-    public void delete(String id){
-        repository.deleteById(id);
-    }
-    
- 
-    
+    public void delete(String reference){
+        repository.deleteById(reference);
+    } 
     
 }
