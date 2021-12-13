@@ -5,8 +5,6 @@
 package com.segioarboleda.divinacomedia.app.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,7 +22,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class HairProduct {
 
     @Id
-    @GeneratedValue
     @JsonProperty("reference")
     private String id;
     

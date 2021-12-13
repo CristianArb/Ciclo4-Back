@@ -22,6 +22,14 @@ public class OrderRepository {
     private OrderCrudRepositiry repository;
     
     
+    /**
+     * Obtener registro
+     * @return
+     */
+    public List<Order> getAll(){
+        return (List<Order>) repository.findAll();
+    }
+    
      /**
      * Obtener registro por Id
      * @param id
@@ -30,15 +38,7 @@ public class OrderRepository {
     public Optional<Order> getOrderById(Integer id){
         return repository.findById(id);
     }
-    
-
-    /**
-     * Obtener registro
-     * @return
-     */
-    public List<Order> getAll(){
-        return (List<Order>) repository.findAll();
-    }
+      
     
      /**
      * Guardar registro
@@ -55,6 +55,29 @@ public class OrderRepository {
      */
     public void delete(Integer id){
         repository.deleteById(id);
-    } 
+    }
+    
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public List<Order> getAllOrderBySalesManId(Integer id){
+        return repository.findBySalesMan_Id(id);
+    }
+
+    /**
+     * 
+     * @param zone
+     * @return
+     */
+    public List<Order> getAllOrderBySalesManZone(String zone){
+        return repository.findBySalesMan_Zone(zone);
+    }
+    
+    
+    public Optional<Order> lastOrderId(){
+        return repository.findTopByOrderByIdDesc();
+    }
     
 }

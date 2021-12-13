@@ -7,6 +7,7 @@ package com.segioarboleda.divinacomedia.app.controller;
 import com.segioarboleda.divinacomedia.app.model.Order;
 import com.segioarboleda.divinacomedia.app.services.OrderService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -39,13 +40,23 @@ public class OrderController {
     @Autowired
     private OrderService service;
     
-  /**
+    /**
      * Metodo GET
      * @return
      */
     @GetMapping("/all") //GET
-    public List<Order> getOrder(){
+    public List<Order> getOrders(){
         return service.getAll();
+    }
+    
+    /**
+     * 
+     * @param id
+     * @return 
+     */
+    @GetMapping("/{id}")
+    public Optional<Order> getOrder(@PathVariable("id") int id) {
+        return service.getOrder(id);
     }
 
     /**
@@ -81,6 +92,16 @@ public class OrderController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("id") Integer id) {
         return service.delete(id);
+    }
+    
+    @GetMapping("/salesman/{id}")
+    public List<Order> getAllOrdersBySalesManId(Integer id){
+        return service.getOrdersBySalesManId(id);
+    }
+
+     @GetMapping("/zona/{zona}")
+    public List<Order> findByZone(@PathVariable("zona") String zona) {
+        return service.getOrdersBySalesManZone(zona);
     }
 
 }

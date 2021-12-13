@@ -7,6 +7,7 @@ package com.segioarboleda.divinacomedia.app.controller;
 import com.segioarboleda.divinacomedia.app.model.HairProduct;
 import com.segioarboleda.divinacomedia.app.services.HairProductService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -40,13 +41,23 @@ public class HairProductController {
     @Autowired
     private HairProductService service;
     
-  /**
+    /**
      * Metodo GET
      * @return
      */
     @GetMapping("/all") //GET
     public List<HairProduct> getHairProducts(){
         return service.getAll();
+    }
+    
+    /**
+     * Metodo GET
+     * @param id
+     * @return
+     */
+     @GetMapping("/{id}")
+    public Optional<HairProduct> getProduct(@PathVariable("id")  String id) {
+        return service.getProduct(id);
     }
 
     /**

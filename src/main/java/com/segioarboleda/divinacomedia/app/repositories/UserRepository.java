@@ -103,10 +103,15 @@ public class UserRepository {
      * @param id
      * @param email
      * @param name
+     * @param identification
      * @return
      */
-    public List<User> getUserByIdOrEmailOrName(Integer id, String email, String name){
-        return repository.findByIdOrEmailOrName(id,email,name);
+    public List<User> getUserByIdOrEmailOrNameOrIdentification(Integer id, String email, String name, String identification){
+        return repository.findByIdOrEmailOrNameOrIdentification(id,email,name,identification);
+    }
+    
+    public Optional<User> lastUserId(){
+        return repository.findTopByOrderByIdDesc();
     }
 
 }

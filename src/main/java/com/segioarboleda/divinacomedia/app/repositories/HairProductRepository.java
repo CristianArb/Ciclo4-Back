@@ -25,13 +25,21 @@ public class HairProductRepository {
     private HairProductCrudRepository repository;
     
     
-     /**
-     * Obtener registro por Id
-     * @param id
+    /**
+     * Obtener registro
      * @return
      */
-    public Optional<HairProduct> getProductById(String id){
-        return repository.findById(id);
+    public List<HairProduct> getAll(){
+        return (List<HairProduct>) repository.findAll();
+    }
+    
+     /**
+     * Obtener registro por Id
+     * @param reference
+     * @return
+     */
+    public Optional<HairProduct> getProductById(String reference){
+        return repository.findById(reference);
     }
    
     
@@ -43,14 +51,6 @@ public class HairProductRepository {
     public Optional<HairProduct> getByReference(String reference) {
         return repository.findByReference(reference);
     }*/
-
-    /**
-     * Obtener registro
-     * @return
-     */
-    public List<HairProduct> getAll(){
-        return (List<HairProduct>) repository.findAll();
-    }
     
      /**
      * Guardar registro

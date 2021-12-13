@@ -50,15 +50,16 @@ public interface UserCrudRepository extends MongoRepository<User ,Integer>{
      * @param id
      * @param email
      * @param name
+     * @param identification
      * @return
      */
-    public List<User> findByIdOrEmailOrName(Integer id, String email, String name);
+    public List<User> findByIdOrEmailOrNameOrIdentification(Integer id, String email, String name, String identification);
     
     /**
      * Seleccionar el usuario
      * @return 
      */
-    //public Optional<User> findTopByOrderByDesc();
+    public Optional<User> findTopByOrderByIdDesc();
 
     
 }

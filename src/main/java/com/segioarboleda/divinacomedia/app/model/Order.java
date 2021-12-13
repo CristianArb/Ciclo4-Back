@@ -7,7 +7,6 @@ package com.segioarboleda.divinacomedia.app.model;
 import java.util.Date;
 import java.util.Map;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,18 +23,24 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "orders")
 public class Order {
 
+    public static String PENDING = "Pendiente";
+
+    public static String APROVED = "Aprobada";
+
+    public static String REJECTED = "Rechazada";
+
     @Id
     @GeneratedValue
     private Integer id;
-    
+
     private Date registerDay;
-    
+
     private String status;
-    
+
     private User salesMan;
 
     private Map<String, HairProduct> products;
-    
+
     private Map<String, Integer> quantities;
 
 }

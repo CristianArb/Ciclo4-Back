@@ -107,6 +107,11 @@ public class UserController {
         return service.delete(id);
     }
     
+    /**
+     * Metodo que devuelve un usuario con el id especificado
+     * @param id
+     * @return 
+     */
    @GetMapping("/{id}")
     public User getUser(@PathVariable("id") Integer id){
         return service.getUserByIdUser(id);

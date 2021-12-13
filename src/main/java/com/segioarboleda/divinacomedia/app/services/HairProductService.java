@@ -26,12 +26,23 @@ public class HairProductService {
     private HairProductRepository repository;
     
 
-     /**
+    /**
      * Obtener todos los registros
      * @return
      */
     public List<HairProduct> getAll(){
         return repository.getAll();
+    }
+    
+    
+    
+    /**
+     * Obtener todos los registros
+     * @param reference
+     * @return
+     */
+    public Optional<HairProduct> getProduct(String reference){
+        return repository.getProductById(reference);
     }
 
     
@@ -57,12 +68,7 @@ public class HairProductService {
     public HairProduct update(HairProduct product){
         Optional<HairProduct> existsProduct = repository.getProductById(product.getId());
         if(existsProduct.isPresent()){
-            
-            
-            
-            if (product.getId()!=null){
-                existsProduct.get().setId(product.getId());
-            }
+                
             if (product.getBrand()!=null){
                 existsProduct.get().setBrand(product.getBrand());
             }

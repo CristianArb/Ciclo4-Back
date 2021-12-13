@@ -35,41 +35,44 @@ public class UserService {
 
     /**
      *
-     * @param id
-     * @return
-     */
-    public Optional<User> getUserById(Integer id) {
-        return repository.getUserById(id);
-    }
-
-
-        /**
-     *
      * @param user
      * @return
      */
-     public User save(User user){
-        if(user.getId()==null){
+    public User save(User user) {
+
+        Optional<User> lastId = repository.lastUserId();
+
+        if (user.getIdentification() == null || user.getName() == null
+                //|| user.getBirthDay() == null || user.getMonthBirthtDay() == null  
+                || user.getAddress() == null || user.getCellPhone() == null
+                || user.getEmail() == null || user.getPassword() == null
+                || user.getZone() == null || user.getType() == null) {
             return user;
-        }else{
-            if(user.getIdentification() == null || user.getName() == null  
-            //|| user.getBirthDay() == null || user.getMonthBirthtDay() == null  
-            || user.getAddress() == null || user.getCellPhone() == null 
-            || user.getEmail() == null ||  user.getPassword() == null 
-            || user.getZone() == null    || user.getType() == null) {
-            return user;
-            }else{
-                List<User> existsUsers = repository.getUserByIdOrEmailOrName(user.getId(),user.getEmail(),user.getName());
-                if(existsUsers.isEmpty()){
-                    return repository.save(user);
-                }else {
-                    return new User();
+        } else {
+
+            if (user.getId() == null) {
+
+                if (lastId.isEmpty()) {
+                    user.setId(1);
+
+                } else {
+                    user.setId(lastId.get().getId() + 1);
+
                 }
             }
+            
+            List<User> existsUsers = repository.getUserByIdOrEmailOrNameOrIdentification(
+                    user.getId(), user.getEmail(), user.getName(),
+                    user.getIdentification());
+            if (existsUsers.isEmpty()) {
+                return repository.save(user);
+            } else {
+                return new User();
+            }
+
         }
+
     }
-    
-    
 
     /**
      * Obtener registro por email
@@ -111,12 +114,12 @@ public class UserService {
             if (user.getName() != null) {
                 existsUser.get().setName(user.getName());
             }
-            /*if (user.getBirthDay() != null) {
+            if (user.getBirthDay() != null) {
                 existsUser.get().setBirthDay(user.getBirthDay());
             }
             if (user.getMonthBirthtDay() != null) {
                 existsUser.get().setMonthBirthtDay(user.getMonthBirthtDay());
-            }*/
+            }
             if (user.getAddress() != null) {
                 existsUser.get().setAddress(user.getAddress());
             }
@@ -147,7 +150,7 @@ public class UserService {
      * @return
      */
     public boolean delete(Integer id) {
-        Boolean aBoolean = getUserById(id).map(user -> {
+        Boolean aBoolean = repository.getUserById(id).map(user -> {
             repository.delete(user.getId());
             return true;
         }).orElse(false);
@@ -160,7 +163,7 @@ public class UserService {
      * @return
      */
     public User getUserByIdUser(Integer id) {
-        return getUserById(id).orElse(new User());
+        return repository.getUserById(id).orElse(new User());
     }
 
 }

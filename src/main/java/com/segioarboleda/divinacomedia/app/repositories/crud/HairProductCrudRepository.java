@@ -5,7 +5,6 @@
 package com.segioarboleda.divinacomedia.app.repositories.crud;
 
 import com.segioarboleda.divinacomedia.app.model.HairProduct;
-import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 
