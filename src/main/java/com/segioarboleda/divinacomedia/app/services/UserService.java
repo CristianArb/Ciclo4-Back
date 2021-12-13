@@ -43,7 +43,7 @@ public class UserService {
         Optional<User> lastId = repository.lastUserId();
 
         if (user.getIdentification() == null || user.getName() == null
-                //|| user.getBirthDay() == null || user.getMonthBirthtDay() == null  
+                //|| user.getbirthtDay() == null || user.getMonthBirthtDay() == null  
                 || user.getAddress() == null || user.getCellPhone() == null
                 || user.getEmail() == null || user.getPassword() == null
                 || user.getZone() == null || user.getType() == null) {
@@ -114,8 +114,8 @@ public class UserService {
             if (user.getName() != null) {
                 existsUser.get().setName(user.getName());
             }
-            if (user.getBirthDay() != null) {
-                existsUser.get().setBirthDay(user.getBirthDay());
+            if (user.getBirthtDay() != null) {
+                existsUser.get().setBirthtDay(user.getBirthtDay());
             }
             if (user.getMonthBirthtDay() != null) {
                 existsUser.get().setMonthBirthtDay(user.getMonthBirthtDay());

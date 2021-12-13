@@ -34,7 +34,7 @@ public class User {
 
     private String name;
 
-    private Date birthDay;
+    private Date birthtDay;
 
     private String monthBirthtDay;
 
