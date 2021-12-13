@@ -95,7 +95,7 @@ public class OrderController {
     }
     
     @GetMapping("/salesman/{id}")
-    public List<Order> getAllOrdersBySalesManId(Integer id){
+    public List<Order> getAllOrdersBySalesManId(@PathVariable("id") Integer id){
         return service.getOrdersBySalesManId(id);
     }
 

@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 //import org.springframework.data.mongodb.repository.Query;
 
 /**
@@ -31,7 +32,7 @@ public interface OrderCrudRepositiry extends MongoRepository<Order, Integer> {
      * @param id
      * @return
      */
-    //@Query("{'salesMan.id':?0}")
+    //@Query("{/*'salesMan.id':?0*/}")
     List<Order> findBySalesMan_Id(Integer id);
     
     /**
