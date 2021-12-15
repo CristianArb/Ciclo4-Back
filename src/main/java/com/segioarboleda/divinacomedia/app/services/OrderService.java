@@ -13,6 +13,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -155,11 +157,17 @@ public class OrderService {
      * @param id
      * @return
      */
-    public List<Order> getOrdersBySalesManRegisterDay(String date, Integer id) throws ParseException {
+    public List<Order> getOrdersBySalesManRegisterDay(String date, Integer id) {
 
         SimpleDateFormat dtf = new SimpleDateFormat("yyyy-MM-dd");
 
-        Date dateD = dtf.parse(date);
+        Date dateD = null;
+        try {
+            dateD = dtf.parse(date);
+        } catch (ParseException ex) {
+            Logger.getLogger(OrderService.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return repository.getAllOrderBySalesManRegisterDay(dateD, id);
 
     }
+}
