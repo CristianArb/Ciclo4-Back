@@ -6,6 +6,10 @@ package com.segioarboleda.divinacomedia.app.services;
 
 import com.segioarboleda.divinacomedia.app.model.Order;
 import com.segioarboleda.divinacomedia.app.repositories.OrderRepository;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -134,25 +138,28 @@ public class OrderService {
     public List<Order> getOrdersBySalesManZone(String zone) {
         return repository.getAllOrderBySalesManZone(zone);
     }
-    
-    
-   /**
-    * 
-    * @param state
-    * @param id
-    * @return 
-    */
+
+    /**
+     *
+     * @param state
+     * @param id
+     * @return
+     */
     public List<Order> getOrdersBySalesManStatus(String state, Integer id) {
-        return repository.getAllOrderBySalesManStatus(state,id);
+        return repository.getAllOrderBySalesManStatus(state, id);
     }
-    
+
     /**
      *
      * @param date
      * @param id
      * @return
      */
-    public List<Order> getOrdersBySalesManRegisterDay(Date date, Integer id) {
-        return repository.getAllOrderBySalesManRegisterDay(date,id);
+    public List<Order> getOrdersBySalesManRegisterDay(String date, Integer id) throws ParseException {
+
+        SimpleDateFormat dtf = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date dateD = dtf.parse(date);
+        return repository.getAllOrderBySalesManRegisterDay(dateD, id);
+
     }
-}
