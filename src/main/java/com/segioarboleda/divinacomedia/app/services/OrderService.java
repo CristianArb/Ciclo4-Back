@@ -6,6 +6,7 @@ package com.segioarboleda.divinacomedia.app.services;
 
 import com.segioarboleda.divinacomedia.app.model.Order;
 import com.segioarboleda.divinacomedia.app.repositories.OrderRepository;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,5 +134,25 @@ public class OrderService {
     public List<Order> getOrdersBySalesManZone(String zone) {
         return repository.getAllOrderBySalesManZone(zone);
     }
-
+    
+    
+   /**
+    * 
+    * @param state
+    * @param id
+    * @return 
+    */
+    public List<Order> getOrdersBySalesManStatus(String state, Integer id) {
+        return repository.getAllOrderBySalesManStatus(state,id);
+    }
+    
+    /**
+     *
+     * @param date
+     * @param id
+     * @return
+     */
+    public List<Order> getOrdersBySalesManRegisterDay(Date date, Integer id) {
+        return repository.getAllOrderBySalesManRegisterDay(date,id);
+    }
 }

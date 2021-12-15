@@ -6,6 +6,7 @@ package com.segioarboleda.divinacomedia.app.controller;
 
 import com.segioarboleda.divinacomedia.app.model.Order;
 import com.segioarboleda.divinacomedia.app.services.OrderService;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,14 +95,48 @@ public class OrderController {
         return service.delete(id);
     }
     
+    
+    /**
+     * 
+     * @param id
+     * @return 
+     */
     @GetMapping("/salesman/{id}")
     public List<Order> getAllOrdersBySalesManId(@PathVariable("id") Integer id){
         return service.getOrdersBySalesManId(id);
     }
 
-     @GetMapping("/zona/{zona}")
+    /**
+     * OO
+     * @param zona
+     * @return 
+     */
+    @GetMapping("/zona/{zona}")
     public List<Order> findByZone(@PathVariable("zona") String zona) {
         return service.getOrdersBySalesManZone(zona);
+    }
+    
+   
+    /**
+     *
+     * @param state
+     * @param id
+     * @return
+     */
+    @GetMapping("/state/{state}/{id}")
+    public List<Order> getOrdersBySalesManStatus(@PathVariable("state") String state, @PathVariable("id") Integer id) {
+        return service.getOrdersBySalesManStatus(state, id);
+    }
+    
+     /**
+     * 
+     * @param date
+     * @param id
+     * @return 
+     */
+    @GetMapping("/date/{date}/{id}")
+    public List<Order> findByRegisterDay(@PathVariable("date") Date date, @PathVariable("id") Integer id) {
+        return service.getOrdersBySalesManRegisterDay(date,id);
     }
 
 }

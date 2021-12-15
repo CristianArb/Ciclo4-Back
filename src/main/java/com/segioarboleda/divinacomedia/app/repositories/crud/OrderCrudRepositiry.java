@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
 //import org.springframework.data.mongodb.repository.Query;
 
 /**
@@ -37,19 +36,19 @@ public interface OrderCrudRepositiry extends MongoRepository<Order, Integer> {
     
     /**
      * 
-     * @param fecha
+     * @param date
      * @param id
      * @return 
      */
-    List<Order> findByRegisterDayAndSalesMan_Id(Date fecha, Integer id);
+    List<Order> findByRegisterDayAndSalesMan_Id(Date date, Integer id);
     
     /**
      * 
-     * @param status
+     * @param state
      * @param id
      * @return 
      */
-    List<Order> findByStatusAndSalesMan_Id(String status, Integer id);
+    List<Order> findByStatusAndSalesMan_Id(String state, Integer id);
      
     /**
      * Para seleccionar la orden con el id maximo

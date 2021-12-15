@@ -10,6 +10,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.segioarboleda.divinacomedia.app.repositories.crud.OrderCrudRepositiry;
+import java.util.Date;
 
 /**
  *
@@ -75,7 +76,31 @@ public class OrderRepository {
         return repository.findBySalesMan_Zone(zone);
     }
     
+    /**
+     * 
+     * @param state
+     * @param id
+     * @return 
+     */
+    public List<Order> getAllOrderBySalesManStatus(String state, Integer id){
+        return repository.findByStatusAndSalesMan_Id(state,  id);
+    }
     
+    /**
+     * 
+     * @param date
+     * @param id
+     * @return
+     */
+    public List<Order> getAllOrderBySalesManRegisterDay(Date date, Integer id){
+        return repository.findByRegisterDayAndSalesMan_Id(date,id);
+    }
+    
+    
+    /**
+     * 
+     * @return 
+     */
     public Optional<Order> lastOrderId(){
         return repository.findTopByOrderByIdDesc();
     }
