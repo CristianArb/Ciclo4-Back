@@ -6,16 +6,15 @@ package com.segioarboleda.divinacomedia.app.services;
 
 import com.segioarboleda.divinacomedia.app.model.Order;
 import com.segioarboleda.divinacomedia.app.repositories.OrderRepository;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,7 +59,7 @@ public class OrderService {
                 || order.getProducts() == null || order.getQuantities() == null
                 || order.getRegisterDay() == null) {
 
-            return order;
+            return  new Order();
 
         } else {
 
@@ -161,23 +160,23 @@ public class OrderService {
      */
     public List<Order> getOrdersBySalesManRegisterDay(String date, Integer id) {
 
-        int year = Integer.parseInt(date.substring(0, 4));
-        int month = Integer.parseInt(date.substring(5, 7));
-        int day = Integer.parseInt(date.substring(7, 10));
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate today = LocalDate.parse(date,f);
+        
+        LocalDate tomorrow = today.plusDays(1);
+        LocalDate yesterday =today.minusDays(1);
+        
+        Date dy = Date.from(yesterday.atStartOfDay().
+                atZone(ZoneId.systemDefault())
+                .toInstant());
+        
+        Date dt = Date.from(tomorrow.atStartOfDay().
+                atZone(ZoneId.systemDefault())
+                .toInstant());
+        
+        return repository.getAllOrderBySalesManRegisterDayBetweenAndSalesMan_Id(dy, dt, id);
 
-        GregorianCalendar fecha = new GregorianCalendar(year, month, day);
-
-        return repository.getAllOrderBySalesManRegisterDay(fecha.getTime(), id);
-        /*
-        SimpleDateFormat dtf = new SimpleDateFormat("yyyy-MM-dd");
-
-        Date dateD = null;
-        try {
-            dateD = dtf.parse(date);
-        } catch (ParseException ex) {
-            return null;
-        }
-        return repository.getAllOrderBySalesManRegisterDay(dateD, id);
-         */
+                
+                
     }
 }

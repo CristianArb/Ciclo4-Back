@@ -56,7 +56,7 @@ public class HairProductService {
             if (existeProduct.isEmpty()) {
                 return repository.save(product);
             } else {
-                return product;
+                return  new HairProduct();
             }
         }
     }
