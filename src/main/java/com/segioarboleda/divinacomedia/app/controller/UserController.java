@@ -115,7 +115,7 @@ public class UserController {
      * @param id
      * @return 
      */
-    @DeleteMapping("/{id}")
+    @GetMapping("/{id}")
     public User getUser(@PathVariable("id") Integer id) {
         return service.getUser(id);
     }
