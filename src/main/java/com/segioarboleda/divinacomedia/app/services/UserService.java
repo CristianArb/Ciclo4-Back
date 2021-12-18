@@ -162,7 +162,7 @@ public class UserService {
      * @param id
      * @return
      */
-    public User getUserByIdUser(Integer id) {
+    public User getUser(Integer id) {
         return repository.getUserById(id).orElse(new User());
     }
     

@@ -111,6 +111,18 @@ public class UserController {
     
     
     /**
+     * Metodo DELETE que actualiza un usuario
+     * @param id
+     * @return 
+     */
+    @DeleteMapping("/{id}")
+    public User getUser(@PathVariable("id") Integer id) {
+        return service.getUser(id);
+    }
+    
+    
+    
+    /**
      * Metodo que devuelve un usuario con el id especificado
      * @param monthBirhtDay
      * @return 
