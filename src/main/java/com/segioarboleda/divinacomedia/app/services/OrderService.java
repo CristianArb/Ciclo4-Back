@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -56,7 +57,8 @@ public class OrderService {
         Optional<Order> lastId = repository.lastOrderId();
 
         if (order.getStatus() == null || order.getSalesMan() == null
-                || order.getProducts() == null || order.getQuantities() == null) {
+                || order.getProducts() == null || order.getQuantities() == null
+                || order.getRegisterDay() == null) {
 
             return order;
 
@@ -159,15 +161,23 @@ public class OrderService {
      */
     public List<Order> getOrdersBySalesManRegisterDay(String date, Integer id) {
 
+        int year = Integer.parseInt(date.substring(0, 4));
+        int month = Integer.parseInt(date.substring(5, 7));
+        int day = Integer.parseInt(date.substring(7, 10));
+
+        GregorianCalendar fecha = new GregorianCalendar(year, month, day);
+
+        return repository.getAllOrderBySalesManRegisterDay(fecha.getTime(), id);
+        /*
         SimpleDateFormat dtf = new SimpleDateFormat("yyyy-MM-dd");
 
         Date dateD = null;
         try {
             dateD = dtf.parse(date);
         } catch (ParseException ex) {
-            Logger.getLogger(OrderService.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
         return repository.getAllOrderBySalesManRegisterDay(dateD, id);
-
+         */
     }
 }

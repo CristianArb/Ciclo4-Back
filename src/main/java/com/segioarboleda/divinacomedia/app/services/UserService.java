@@ -165,5 +165,9 @@ public class UserService {
     public User getUserByIdUser(Integer id) {
         return repository.getUserById(id).orElse(new User());
     }
+    
+    public List<User> getUserByBirthtDay(String monthBirhtDay){
+        return repository.getUserByMonthBirthtDay(monthBirhtDay);
+    }
 
 }

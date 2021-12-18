@@ -99,6 +99,19 @@ public class OrderRepository {
     
     /**
      * 
+     * @param date
+     * @param id
+     * @return
+     */
+    public List<Order> getAllOrderBySalesManRegisterDayBetweenAndSalesMan_Id(Date date1, Date date2, Integer id){
+        return repository.findByRegisterDayBetweenAndSalesMan_Id(date1,date2,id);
+    }
+    
+
+    
+    
+    /**
+     * 
      * @return 
      */
     public Optional<Order> lastOrderId(){

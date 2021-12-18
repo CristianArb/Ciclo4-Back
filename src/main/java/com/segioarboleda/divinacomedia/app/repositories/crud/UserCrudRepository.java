@@ -8,6 +8,7 @@ import com.segioarboleda.divinacomedia.app.model.User;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 
 /**
  *
@@ -60,6 +61,13 @@ public interface UserCrudRepository extends MongoRepository<User ,Integer>{
      * @return 
      */
     public Optional<User> findTopByOrderByIdDesc();
-
+    
+    /**
+     * 
+     * @param monthBirhtDay
+     * @return 
+     */
+    //@Query("{/*'user.monthBirthDay':?0*/}")
+    public List<User> findByMonthBirthtDay(String monthBirhtDay);
     
 }

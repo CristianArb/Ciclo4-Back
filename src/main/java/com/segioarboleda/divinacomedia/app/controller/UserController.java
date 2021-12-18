@@ -7,6 +7,7 @@ package com.segioarboleda.divinacomedia.app.controller;
 import com.segioarboleda.divinacomedia.app.model.User;
 import com.segioarboleda.divinacomedia.app.services.UserService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -107,14 +108,16 @@ public class UserController {
         return service.delete(id);
     }
     
+    
+    
     /**
      * Metodo que devuelve un usuario con el id especificado
-     * @param id
+     * @param monthBirhtDay
      * @return 
      */
-   @GetMapping("/{id}")
-    public User getUser(@PathVariable("id") Integer id){
-        return service.getUserByIdUser(id);
+   @GetMapping("birthday/{monthBirhtDay}")
+    public List<User> getUserByBirthtDay(@PathVariable("monthBirhtDay") String monthBirhtDay){
+        return service.getUserByBirthtDay(monthBirhtDay);
     }
 
 }

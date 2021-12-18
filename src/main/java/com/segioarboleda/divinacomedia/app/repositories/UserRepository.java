@@ -10,6 +10,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.segioarboleda.divinacomedia.app.repositories.crud.UserCrudRepository;
+import org.springframework.data.mongodb.repository.Query;
 
 /**
  *
@@ -112,6 +113,11 @@ public class UserRepository {
     
     public Optional<User> lastUserId(){
         return repository.findTopByOrderByIdDesc();
+    }
+    
+
+    public List<User> getUserByMonthBirthtDay(String monthBirhtDay){
+        return repository.findByMonthBirthtDay(monthBirhtDay);
     }
 
 }

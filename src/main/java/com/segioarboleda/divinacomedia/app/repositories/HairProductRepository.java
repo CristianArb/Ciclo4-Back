@@ -69,4 +69,12 @@ public class HairProductRepository {
         repository.deleteById(reference);
     } 
     
+    public List<HairProduct> getProductsByPrice(double price){
+        return repository.findByPrice(price);    
+    }
+    
+    public List<HairProduct> getProductsByDescription(String description){
+        return repository.findByDescription(description);
+    }
+    
 }

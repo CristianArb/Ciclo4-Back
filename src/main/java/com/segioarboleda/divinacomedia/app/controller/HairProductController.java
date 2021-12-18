@@ -94,5 +94,27 @@ public class HairProductController {
     public boolean delete(@PathVariable("id") String id) {
         return service.delete(id);
     }
+    
+    
+    /**
+     * Metodo que devuelve el producto por el precio
+     * @param price
+     * @return 
+     */
+    @GetMapping("/price/{price}")
+    public List<HairProduct> getProductsByPrice(@PathVariable("price") double price) {
+        return service.getProductsByPrice(price);
+    }
+    
+    
+    /**
+     * Metodo que devuelve el producto por el precio
+     * @param description
+     * @return 
+     */
+    @GetMapping("/description/{description}")
+    public List<HairProduct> getProductByDescription(@PathVariable("description") String description) {
+        return service.getProductsByDescription(description);
+    }
 
 }

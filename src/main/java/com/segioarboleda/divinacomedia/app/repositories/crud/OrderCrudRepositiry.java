@@ -36,6 +36,15 @@ public interface OrderCrudRepositiry extends MongoRepository<Order, Integer> {
     
     /**
      * 
+     * @param date1
+     * @param date2
+     * @param id
+     * @return 
+     */
+    List<Order> findByRegisterDayBetweenAndSalesMan_Id(Date date1, Date date2, Integer id);
+    
+    /**
+     * 
      * @param date
      * @param id
      * @return 
@@ -48,6 +57,7 @@ public interface OrderCrudRepositiry extends MongoRepository<Order, Integer> {
      * @param id
      * @return 
      */
+    //
     List<Order> findByStatusAndSalesMan_Id(String state, Integer id);
      
     /**
